@@ -9,6 +9,10 @@ var random = require("random-js")() // uses the nativeMath engine
 
 var server = http.createServer((req, res) => {
   var value = random.integer(1, 6)
+  if (value === 2) {
+    // never respond back, client should timeout
+    return
+  }
   if (value === 1) {
     return sendError(req, res, {
       logger: log,
