@@ -9,6 +9,16 @@ var random = require("random-js")() // uses the nativeMath engine
 
 var server = http.createServer((req, res) => {
   var value = random.integer(1, 6)
+  if (value === 3) {
+    return sendError(req, res, {
+      logger: log,
+      body: {
+        message: 'Internal Server Error',
+        statusCode: 500
+      },
+      bodyStatusCode: true
+    })
+  }
   if (value === 2) {
     // never respond back, client should timeout
     return
